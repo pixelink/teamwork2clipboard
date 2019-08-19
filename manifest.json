@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Teamwork title & id",
   "description": "Copy Teamwork ticket title and ID to clipboard",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Benjamin Riezler - Pixel Ink GmbH",
   "browser_action": {
     "default_icon": "tab-icon.png",
@@ -11,7 +11,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://project.pixel-ink.de/desk/*"
+        "https://project.pixel-ink.de/desk/*",
+        "https://project.pixel-ink.de/desk/tickets/*"
       ],
       "js": [
         "content.js"

@@ -1,16 +1,17 @@
 var ticketTitle;
 
 setInterval(function () {
-    if (window.location.href.indexOf("/desk/#/tickets/") > 0) {
+    if (window.location.href.indexOf("/desk/tickets/") > 0) {
 
         ticketTitle = document.title;
-        ticketIdContainer = document.getElementsByClassName('id-hold')[0];
+        ticketIdContainer = document.getElementsByClassName('ticket-id')[0];
         ticketId = ticketIdContainer.innerText;
 
         ticketIdContainer.addEventListener('click', function () {
+            var titleId = ticketTitle + ' - ' + ticketId;
 
-            navigator.clipboard.writeText(ticketTitle).then(function () {
-                copyStringToClipboard(ticketTitle);
+            navigator.clipboard.writeText(titleId).then(function () {
+                copyStringToClipboard(titleId);
             }, function (err) {
                 console.error('Async: Could not copy text: ', err);
             });
