@@ -8,7 +8,7 @@ setInterval(function () {
         ticketId = ticketIdContainer.innerText;
 
         ticketIdContainer.addEventListener('click', function () {
-            var titleId = ticketTitle + ' - ' + ticketId;
+            var titleId = ticketTitle;
 
             navigator.clipboard.writeText(titleId).then(function () {
                 copyStringToClipboard(titleId);
@@ -38,7 +38,3 @@ function copyStringToClipboard(str) {
     // Temporäres Element löschen
     document.body.removeChild(el);
 }
-
-
-
-
