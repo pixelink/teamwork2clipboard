@@ -20,25 +20,17 @@
     }
 
     // helper function to write the text to the computers clipboard
+
+    // @ToDo clipboard-write wird in FF nicht unterstützt
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=1560373
+    // https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/write
+
     const writeToClipboard = (text) => {
-        navigator
-            .permissions
-            .query({ name: "clipboard-write" })
-            .then(result => {
-                if (["granted", "prompt"].includes(result.state)) {
-                    navigator
-                    .clipboard
-                        .writeText(text)
-                        .then(
-                            () => {}, 
-                            () => {
-                                alert('Could not access clipboard')
-                            }
-                        )
-                    ;
-                }
-            })
-        ;
+        navigator.clipboard.writeText(text).then(function () {
+            copyStringToClipboard(titleId);
+        }, function (err) {
+            console.error('Async: Could not copy text: ', err);
+        });
     }
 
     // return the ticket id element
@@ -87,34 +79,6 @@
             getTicketId().insertAdjacentElement('beforeBegin', div)
         }
     }
-
-    // Add stylesheet to head
-    document.head.insertAdjacentHTML("beforeend", 
-`<style>
-.${miteClassName} {
-    color: #999;
-    background-color: #f5f7fa;
-    font-size: 18px;
-    line-height: 25px;
-    cursor: pointer;
-    display: block;
-    align-self: center;
-    padding: 5px 10px;
-    margin: -10px 15px -15px -15px;
-    border: 1px rgba(0,0,0,.1) solid;
-    border-radius: 3px;
-    transition: all .1s ease-in-out;
-}
-.${miteClassName}:hover {
-    box-shadow: inset 2px 2px 2px rgba(255,255,255,.3),inset -2px -2px 2px rgba(0,0,0,.2);
-    background-color: rgba(245,247,250,.2);
-}
-.${miteClassName}:active {
-    box-shadow: inset 2px 2px 2px rgba(0,0,0,.2),inset -2px -2px 2px rgba(255,255,255,.3);
-    background-color: #3b93f7;
-    color: white;
-}
-</style>`)
 
 
     // Observe every change in document
