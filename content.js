@@ -25,12 +25,13 @@
     // https://bugzilla.mozilla.org/show_bug.cgi?id=1560373
     // https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/write
 
-    const writeToClipboard = (text) => {
-        navigator.clipboard.writeText(text).then(function () {
-            copyStringToClipboard(titleId);
-        }, function (err) {
-            console.error('Async: Could not copy text: ', err);
-        });
+    const writeToClipboard = async (text) => {
+        try {
+            await navigator.clipboard.writeText(text)
+            console.info('Copied the text to the clipboard')
+        } catch(err) {
+            console.error('Async: Could not copy text to clipboard: ', err);
+        }
     }
 
     // return the ticket id element
